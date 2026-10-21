@@ -1,0 +1,23 @@
+
+# Environment variables and secrets
+backend/.env
+.env
+.env.*
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Local database
+backend/research_mind.db
+*.db
+
+# Generated FAISS indexes
+backend/faiss_indexes/
+
+# Uploaded files
+backend/uploads/
+
+# Virtual environments
+venv/
+.venv/
