@@ -12,7 +12,6 @@ from app.routers.analysis import (
     search_router,
     qa_router,
     compare_router,
-    gaps_router,
     topics_router,
     reports_router,
 )
@@ -51,7 +50,6 @@ app.include_router(papers_router)
 app.include_router(search_router)
 app.include_router(qa_router)
 app.include_router(compare_router)
-app.include_router(gaps_router)
 app.include_router(topics_router)
 app.include_router(reports_router)
 

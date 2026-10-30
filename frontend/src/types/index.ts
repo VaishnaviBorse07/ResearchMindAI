@@ -97,29 +97,6 @@ export interface ComparisonResult {
   dimensions: string[]
 }
 
-export interface ResearchGap {
-  gap: string
-  theme: string
-  evidence_count: number
-  supporting_papers: Array<{
-    paper_id: string
-    title: string
-    evidence: string
-  }>
-}
-
-export interface GapsResult {
-  limitations: Array<{ paper_id: string; title: string; text: string; type: string }>
-  future_work: Array<{ paper_id: string; title: string; text: string; type: string }>
-  recurring_themes: Array<{
-    theme: string
-    occurrences: number
-    papers: Array<{ paper_id: string; title: string; evidence: string }>
-  }>
-  candidate_gaps: ResearchGap[]
-  disclaimer: string
-}
-
 export interface TopicsResult {
   method: string
   topics: Topic[]

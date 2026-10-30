@@ -2,7 +2,7 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import {
   Brain, Home, Upload, Search, MessageSquare, GitCompare,
-  Lightbulb, BarChart2, ExternalLink
+  BarChart2, ExternalLink
 } from 'lucide-react'
 import LandingPage from './pages/LandingPage'
 import Dashboard from './pages/Dashboard'
@@ -11,7 +11,6 @@ import PaperDetail from './pages/PaperDetail'
 import SemanticSearch from './pages/SemanticSearch'
 import QAPage from './pages/QAPage'
 import ComparePapers from './pages/ComparePapers'
-import ResearchGaps from './pages/ResearchGaps'
 import TopicsPage from './pages/TopicsPage'
 
 const navItems = [
@@ -21,7 +20,6 @@ const navItems = [
   { icon: Search, label: 'Semantic Search', path: '/search' },
   { icon: MessageSquare, label: 'Ask Questions', path: '/qa' },
   { icon: GitCompare, label: 'Compare Papers', path: '/compare' },
-  { icon: Lightbulb, label: 'Research Gaps', path: '/gaps' },
   { icon: BarChart2, label: 'Topic Modeling', path: '/topics' },
 ]
 
@@ -121,7 +119,6 @@ export default function App() {
               <Route path="/search" element={<SemanticSearch />} />
               <Route path="/qa" element={<QAPage />} />
               <Route path="/compare" element={<ComparePapers />} />
-              <Route path="/gaps" element={<ResearchGaps />} />
               <Route path="/topics" element={<TopicsPage />} />
             </Routes>
           </AppLayout>

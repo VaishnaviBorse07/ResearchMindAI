@@ -18,7 +18,8 @@ class Settings(BaseSettings):
 
     # LLM
     openai_api_key: str = ""
-    llm_provider: str = "local"  # "openai" or "local"
+    gemini_api_key: str = ""
+    llm_provider: str = "local"  # "openai", "gemini", or "local"
     huggingface_token: str = ""
 
     # CORS

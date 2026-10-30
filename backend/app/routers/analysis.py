@@ -1,5 +1,5 @@
 """
-Search, QA, Comparison, Research Gaps, Topics, and Reports Routers
+Search, QA, Comparison, Topics, and Reports Routers
 """
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException
@@ -149,43 +149,6 @@ async def compare_papers(request: CompareRequest, db: AsyncSession = Depends(get
     from app.services.comparison_service import compare_papers as do_compare
     comparison = do_compare(papers_data)
     return comparison
-
-
-# ─── Research Gaps Router ────────────────────────────────────────────────────
-gaps_router = APIRouter(prefix="/api/research-gaps", tags=["research-gaps"])
-
-
-class GapsRequest(BaseModel):
-    paper_ids: Optional[List[str]] = None
-
-
-@gaps_router.post("/analyze")
-async def analyze_gaps(request: GapsRequest, db: AsyncSession = Depends(get_db)):
-    """Identify potential research gaps from multiple papers."""
-    paper_ids = request.paper_ids
-    query = select(Paper).where(Paper.processed == True)
-    if paper_ids:
-        query = query.where(Paper.id.in_(paper_ids))
-
-    result = await db.execute(query)
-    papers = result.scalars().all()
-
-    if not papers:
-        raise HTTPException(status_code=404, detail="No processed papers found.")
-
-    papers_data = [
-        {
-            "paper_id": p.id,
-            "title": p.title or p.filename,
-            "sections": p.sections or {},
-            "keywords": p.keywords or [],
-        }
-        for p in papers
-    ]
-
-    from app.services.comparison_service import analyze_research_gaps
-    gaps = analyze_research_gaps(papers_data)
-    return gaps
 
 
 # ─── Topics Router ───────────────────────────────────────────────────────────

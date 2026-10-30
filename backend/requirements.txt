@@ -53,3 +53,6 @@ pandas>=2.2.0
 
 # OpenAI (optional, for LLM)
 openai>=1.45.0
+
+# Google Gemini (for LLM)
+google-generativeai>=0.7.0

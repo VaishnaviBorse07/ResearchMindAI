@@ -73,12 +73,6 @@ export const compareApi = {
     api.post('/papers/compare', { paper_ids: paperIds }),
 }
 
-// ─── Research Gaps API ────────────────────────────────────────────────────────
-export const gapsApi = {
-  analyze: (paperIds?: string[]) =>
-    api.post('/research-gaps/analyze', { paper_ids: paperIds }),
-}
-
 // ─── Topics API ───────────────────────────────────────────────────────────────
 export const topicsApi = {
   analyze: (paperIds?: string[], numTopics = 5) =>

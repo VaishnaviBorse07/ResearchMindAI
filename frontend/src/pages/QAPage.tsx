@@ -10,6 +10,33 @@ interface Message {
   chunks?: QAResponse['retrieved_chunks']
 }
 
+/** Render simple markdown: **bold**, *italic*, --- hr, and line breaks */
+function RenderMarkdown({ text }: { text: string }) {
+  const lines = text.split('\n')
+  return (
+    <div style={{ lineHeight: 1.8 }}>
+      {lines.map((line, i) => {
+        if (line.trim() === '---') {
+          return <hr key={i} style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.12)', margin: '10px 0' }} />
+        }
+        // Render **bold** segments
+        const segments = line.split(/\*\*(.+?)\*\*/g)
+        const rendered = segments.map((seg, j) =>
+          j % 2 === 1
+            ? <strong key={j} style={{ color: 'var(--text-primary)', fontWeight: 700 }}>{seg}</strong>
+            : seg.replace(/\*(.+?)\*/g, '$1') // strip lone *italic* for simplicity
+        )
+        return (
+          <span key={i}>
+            {rendered}
+            {i < lines.length - 1 && <br />}
+          </span>
+        )
+      })}
+    </div>
+  )
+}
+
 export default function QAPage() {
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -86,7 +113,10 @@ export default function QAPage() {
               {/* Bubble */}
               <div>
                 <div className={msg.role === 'user' ? 'chat-bubble-user' : 'chat-bubble-ai'}>
-                  {msg.content}
+                  {msg.role === 'assistant'
+                    ? <RenderMarkdown text={msg.content} />
+                    : msg.content
+                  }
                 </div>
 
                 {/* Sources */}
